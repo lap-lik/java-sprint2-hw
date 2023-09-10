@@ -47,7 +47,7 @@ public class YearlyReport {
             if (!monthProfit.isExpense()) {
                 for (MonthTotalPerYear monthExpense : yearlyReport.get(year)) {
                     if (monthProfit.getMonth().equals(monthExpense.getMonth()) && monthExpense.isExpense()) {
-                        System.out.println("Прибыль за " + monthProfit.getMonth() + " составила " + (monthProfit.getAmount() - monthExpense.getAmount()));
+                        System.out.printf("Прибыль за %s составила %d\n", monthProfit.getMonth(), (monthProfit.getAmount() - monthExpense.getAmount()));
                     }
                 }
             }

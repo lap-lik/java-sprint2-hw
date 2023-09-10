@@ -12,11 +12,13 @@ public class ReportEngine {
 
     private void check() {
         System.out.print("\u001B[32m");
-        if (monthlyReport.getMonthlyReport().isEmpty() && yearlyReport.getYearlyReport().isEmpty()) {
+        boolean monthlyRep = monthlyReport.getMonthlyReport().isEmpty();
+        boolean yearlyRep = yearlyReport.getYearlyReport().isEmpty();
+        if (monthlyRep && yearlyRep) {
             System.out.println("Отчеты не считаны выполните пункты №1 и №2");
-        } else if (monthlyReport.getMonthlyReport().isEmpty() && !yearlyReport.getYearlyReport().isEmpty()) {
+        } else if (monthlyRep) {
             System.out.println("Отчеты не считаны выполните пункт №1");
-        } else if (!monthlyReport.getMonthlyReport().isEmpty() && yearlyReport.getYearlyReport().isEmpty()) {
+        } else if (yearlyRep) {
             System.out.println("Отчеты не считаны выполните пункт №2");
         } else {
             checkAllReports();
@@ -41,18 +43,19 @@ public class ReportEngine {
     }
 
     private void checkReport(HashMap<String, HashMap<String, Integer>> mapMonth, HashMap<String, HashMap<String, Integer>> mapYear, String text) {
+        System.out.println();
         for (String year : mapMonth.keySet()) {
             HashMap<String, Integer> transactionsByMonthReport = mapMonth.get(year);
             HashMap<String, Integer> transactionsByYearReport = mapYear.get(year);
             if (transactionsByYearReport == null) {
-                System.out.println("Отчет о " + text + "ах по месяцам за " + year + " год есть, но годового отчета нет.");
+                System.out.printf("Отчет о %sах по месяцам за %s год есть, но годового отчета нет.\n", text, year);
                 continue;
             }
             for (String transaction : transactionsByMonthReport.keySet()) {
                 int sumByMonthReport = transactionsByMonthReport.get(transaction);
                 int sumByYearReport = transactionsByYearReport.getOrDefault(transaction, 0);
                 if (sumByMonthReport != sumByYearReport) {
-                    System.out.println(transaction + " " + year + " года, " + text + " в отчете за месяц был " + sumByMonthReport + ", а в отчете за год " + text + " " + sumByYearReport);
+                    System.out.printf("%s %s года, %s в отчете за месяц был %d, а в отчете за год %s %d.\n", transaction, year, text, sumByMonthReport, text, sumByYearReport);
                 }
             }
         }

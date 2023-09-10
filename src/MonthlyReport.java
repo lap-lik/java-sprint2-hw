@@ -57,7 +57,7 @@ public class MonthlyReport {
         if (profit == 0) {
             System.out.println("В этом месяце не было продаж.");
         } else {
-            System.out.println("Самый прибыльный товар: " + productName + " на сумму " + profit);
+            System.out.printf("Самый прибыльный товар: %s на сумму %d\n", productName, profit);
         }
     }
 
@@ -77,7 +77,7 @@ public class MonthlyReport {
         if (expense == 0) {
             System.out.println("В этом месяце не было покупок.");
         } else {
-            System.out.println("Самая больщая трата: " + productName + " на сумму " + expense);
+            System.out.printf("Самая больщая трата: %s на сумму %d\n", productName, expense);
         }
     }
 
